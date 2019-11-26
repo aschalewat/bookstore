@@ -1,10 +1,7 @@
 package com.aschalew.bookstore.domain;
 
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,21 +13,27 @@ import javax.validation.constraints.Size;
 
 @RequiredArgsConstructor
 @Getter
+@Setter
 @ToString
 @EqualsAndHashCode
-@Entity
+@Entity(name = "books")
 public class Book {
 
     @Id
     @GeneratedValue
-    private int bookId;
+    private Long bookId;
 
-    @NotNull
-    @Size(min = 2, max = 20)
+    //@NotNull
     private String title;
 
-    @DecimalMin(value = "2.0")
-    @DecimalMax(value = "100.0")
+    //@DecimalMin(value = "2.0")
+    //@DecimalMax(value = "100.0")
     private double price;
+
+    private Long catId;
+
+    private Long authorId;
+
+    //private Author author;
 
 }

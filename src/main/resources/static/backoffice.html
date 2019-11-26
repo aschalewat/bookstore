@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Backoffice v1</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="backoffice-client.js"></script>
+</head>
+
+<body>
+<div>
+    <h1>Administrative page to My Book Store</h1>
+    <h2></h2>
+    <script>
+        $('a').click(function(){
+            var id = $(this).attr('id');
+            alert("hello" + id);
+            var data = $('#booklist_body');
+            alert(data);
+
+        });
+
+    </script>
+
+    <h2>Book List</h2>
+
+    <table id="booklist" method="delete">  <h2><span class="book"></span></h2>
+        <tr>
+            <th>BookId</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Author</th>
+        </tr>
+        <tbody id="booklist-body"></tbody>
+    </table>
+
+    <p id="book-add">
+    <h2>Add new book</h2>
+    <form id="book-form-add">
+        <!--BookId: <input type="text" name="bookId" id="id"><br>-->
+        Title: <input type="text" name="title" id="tit"><br>
+        Price: <input type="text" name="price" id="pr"><br>
+        Author: <select name="auth-list" id="auth"></select><br>
+        Category: <select name="cat-list" id="cat"></select><br>
+        <input type="submit" value="Add Book" id="btn">
+    </form>
+    </p>
+
+    <p id="author-add">
+    <h2>Add new Author</h2>
+    <form id="author-form-add">
+        AuthId: <input type="text" name="authId" id="auth_id" disabled><br>
+        First Name: <input type="text" name="firstName" id="first_name"><br>
+        Last Name: <input type="text" name="lastName" id="last_name"><br>
+        <input type="submit" value="Add Author" id="auth-btn">
+    </form>
+    </p>
+
+    <p id="book-update">
+    <h2>Edit new book</h2>
+    <form id="book-form-update">
+        BookId: <input type="text" name="bookId" id="u-id" disabled><br>
+        Title: <input type="text" name="title" id="u-tit"><br>
+        Price: <input type="text" name="price" id="u-pr"><br>
+        Author: <select name="auth-list" id="u-auth"></select><br>
+        Category: <select name="cat-list" id="u-cat"></select><br>
+        <input type="submit" value="Edit Book" id="u-btn">
+    </form>
+    </p>
+
+    <p>
+    <h2>Add new Category</h2>
+    <form id="cat-form">
+        CatId: <input type="text" name="catId" id="cat_id"><br>
+        Cat Name: <input type="text" name="catName" id="cat_name"><br>
+        <input type="submit" value="Add Category" id="catBtn">
+    </form>
+    </p>
+    <h2><span class="result-message"></span></h2>
+</div>
+</body>
+</html>
