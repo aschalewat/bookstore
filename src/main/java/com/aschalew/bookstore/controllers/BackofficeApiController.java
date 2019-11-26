@@ -118,7 +118,7 @@ public class BackofficeApiController {
 
   @PostMapping("/cms/login")
     public ResponseEntity<String> login(@RequestBody User user){
-        User dbUser = userService.findByUserName(user.getUserName());
+        User dbUser = userService.findByUserName(user.getUsername());
         if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
             return ResponseEntity.ok("logged in");
         } else if (dbUser != null && ! dbUser.getPassword().equals(user.getPassword())){
