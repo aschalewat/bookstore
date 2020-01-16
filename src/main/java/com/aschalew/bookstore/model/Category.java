@@ -1,14 +1,10 @@
-package com.aschalew.bookstore.domain;
+package com.aschalew.bookstore.model;
 
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Getter

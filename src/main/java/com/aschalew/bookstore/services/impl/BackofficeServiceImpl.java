@@ -1,7 +1,6 @@
 package com.aschalew.bookstore.services.impl;
 
-import com.aschalew.bookstore.controllers.BackofficeApiController;
-import com.aschalew.bookstore.domain.Book;
+import com.aschalew.bookstore.model.Book;
 import com.aschalew.bookstore.repository.BookRepository;
 import com.aschalew.bookstore.services.BackofficeService;
 import org.slf4j.Logger;
@@ -9,9 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BackofficeServiceImpl implements BackofficeService {

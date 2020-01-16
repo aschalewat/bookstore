@@ -22,6 +22,9 @@
 
     </script>
 
+
+
+
     <h2>Book List</h2>
 
     <table id="booklist" method="delete">  <h2><span class="book"></span></h2>
@@ -41,6 +44,7 @@
         <!--BookId: <input type="text" name="bookId" id="id"><br>-->
         Title: <input type="text" name="title" id="tit"><br>
         Price: <input type="text" name="price" id="pr"><br>
+        Description: <input type="text" name="desc" id="desc"><br>
         Author: <select name="auth-list" id="auth"></select><br>
         Category: <select name="cat-list" id="cat"></select><br>
         <input type="submit" value="Add Book" id="btn">
@@ -77,6 +81,20 @@
         <input type="submit" value="Add Category" id="catBtn">
     </form>
     </p>
+
+    <p id="users-add">
+    <h2>Add new user</h2>
+    <form id="user-form-add" action="/backoffice.html">
+        Username: <input type="text" name="username" id="user_name"><br>
+        Password: <input type="password" name="password" id="pass" pattern="*"><br>
+        Address: <input type="text" name="address" id="adrs"><br>
+        Role: <input type="text" name="role" id="rol;"><br>
+        <input type="submit" value="Add Author" id="user-btn">
+    </form>
+    </p>
+
+
+
     <h2><span class="result-message"></span></h2>
 </div>
 </body>

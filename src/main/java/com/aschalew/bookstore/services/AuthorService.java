@@ -1,6 +1,6 @@
 package com.aschalew.bookstore.services;
 
-import com.aschalew.bookstore.domain.Author;
+import com.aschalew.bookstore.model.Author;
 
 import java.util.List;
 

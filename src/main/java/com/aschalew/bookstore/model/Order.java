@@ -1,5 +1,4 @@
-package com.aschalew.bookstore.domain;
-
+package com.aschalew.bookstore.model;
 
 import lombok.*;
 
@@ -12,13 +11,15 @@ import javax.persistence.Id;
 @Setter
 @ToString
 @EqualsAndHashCode
-@Entity(name = "authors")
-public class Author {
+@Entity(name = "orders")
+public class Order {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String firstName;
-    private String lastName;
+    private Long bookId;
+    private Long customerId;
+    private Double price;
+    private int amount;
 }

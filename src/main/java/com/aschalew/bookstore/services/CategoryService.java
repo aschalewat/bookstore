@@ -1,6 +1,6 @@
 package com.aschalew.bookstore.services;
 
-import com.aschalew.bookstore.domain.Category;
+import com.aschalew.bookstore.model.Category;
 
 import java.util.List;
 

@@ -2,6 +2,7 @@ package com.aschalew.bookstore.services.impl;
 
 import com.aschalew.bookstore.services.BackofficeService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class BackofficeServiceImplTest {
     public void setUp() throws Exception {
     }
 
+    @Ignore
     @Test
     public void addBook() {
 

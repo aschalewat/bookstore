@@ -1,6 +1,6 @@
 package com.aschalew.bookstore.services.impl;
 
-import com.aschalew.bookstore.domain.Category;
+import com.aschalew.bookstore.model.Category;
 import com.aschalew.bookstore.repository.CategoryRepository;
 import com.aschalew.bookstore.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.aschalew.bookstore.domain;
+package com.aschalew.bookstore.model;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -25,4 +25,6 @@ public class User {
     private String password;
 
     private String address;
+
+    private String role;
 }

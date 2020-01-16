@@ -1,4 +1,4 @@
-package com.aschalew.bookstore.domain;
+package com.aschalew.bookstore.model;
 
 
 import lombok.*;
@@ -6,10 +6,6 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @RequiredArgsConstructor
 @Getter
@@ -34,6 +30,6 @@ public class Book {
 
     private Long authorId;
 
-    //private Author author;
+    private String description;
 
 }

@@ -1,4 +1,4 @@
-package com.aschalew.bookstore.domain;
+package com.aschalew.bookstore.model;
 
 
 import lombok.*;
