@@ -1,8 +1,6 @@
 package com.aschalew.bookstore.services;
 
-import com.aschalew.bookstore.domain.User;
-import com.aschalew.bookstore.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.aschalew.bookstore.model.User;
 
 import java.util.List;
 

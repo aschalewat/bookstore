@@ -1,6 +1,6 @@
 package com.aschalew.bookstore.services.impl;
 
-import com.aschalew.bookstore.domain.Author;
+import com.aschalew.bookstore.model.Author;
 import com.aschalew.bookstore.repository.AuthorRepository;
 import com.aschalew.bookstore.services.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;

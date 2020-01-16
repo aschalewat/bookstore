@@ -1,9 +1,9 @@
 package com.aschalew.bookstore.controllers;
 
-import com.aschalew.bookstore.domain.Author;
-import com.aschalew.bookstore.domain.Book;
-import com.aschalew.bookstore.domain.Category;
-import com.aschalew.bookstore.domain.User;
+import com.aschalew.bookstore.model.Author;
+import com.aschalew.bookstore.model.Book;
+import com.aschalew.bookstore.model.Category;
+import com.aschalew.bookstore.model.User;
 import com.aschalew.bookstore.services.AuthorService;
 import com.aschalew.bookstore.services.BackofficeService;
 import com.aschalew.bookstore.services.CategoryService;
@@ -11,6 +11,7 @@ import com.aschalew.bookstore.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +48,7 @@ public class BackofficeApiController {
             book1.setTitle(book.getTitle());
             book1.setPrice(Double.valueOf(book.getPrice()));
             book1.setCatId(Long.valueOf(book.getCatId()));
+            book1.setAuthorId(book.getAuthorId());
         }
 
         backofficeService.addBook(book1);
@@ -116,16 +118,46 @@ public class BackofficeApiController {
         return ResponseEntity.ok(authorService.getAuthors());
   }
 
-  @PostMapping("/cms/login")
-    public ResponseEntity<String> login(@RequestBody User user){
-        User dbUser = userService.findByUserName(user.getUsername());
-        if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
-            return ResponseEntity.ok("logged in");
-        } else if (dbUser != null && ! dbUser.getPassword().equals(user.getPassword())){
-            return ResponseEntity.ok("Wrong Password!");
-        } else {
-            return ResponseEntity.ok(" No such username exists.");
+  @PostMapping("users/add")
+  public void addUser(@RequestBody User user){
+      LOGGER.debug("/users/add {}", user.getUsername());
+        if (user != null){
+            userService.addUser(user);
         }
+  }
+
+  @GetMapping("/users/list")
+  public ResponseEntity<List<User>> getUsers(){
+        return ResponseEntity.ok(userService.gerUsers());
+  }
+
+  @PostMapping("/users/update")
+  public void updateUser(User user){
+        if (user != null){
+            userService.updateUser(user);
+        }
+  }
+
+  @PostMapping("/cms/login")
+    public ResponseEntity<HttpStatus> login(@RequestBody User user){
+        User dbUser = userService.findByUserName(user.getUsername());
+        LOGGER.debug("login" + user.getUsername());
+        if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
+           // goToLogin();
+            LOGGER.debug("user {} successfully logged in! ", user.getUsername());
+            return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        } else if (dbUser != null && ! dbUser.getPassword().equals(user.getPassword())){
+            LOGGER.debug("Password doesn't match");
+            return ResponseEntity.badRequest().body(HttpStatus.BAD_REQUEST);
+        } else {
+            LOGGER.debug("This user doesn't exist! ");
+            return ResponseEntity.badRequest().body(HttpStatus.BAD_REQUEST);
+        }
+
+  }
+
+  @GetMapping()
+    public void goToLogin(){
 
   }
 

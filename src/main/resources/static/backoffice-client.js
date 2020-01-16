@@ -1,5 +1,5 @@
 
-
+var loggedIn = false;
 function updateBookList() {
     $.ajax({
         url: "http://localhost:8085/backoffice/books/list"
@@ -34,7 +34,7 @@ function updateBookList() {
                        var td_delete = $('<td><input type="submit" value="Delete Book"></td>').on('click', function(){
                                $.ajax({
                                    url : '/backoffice/books/delete/{id}',
-                                    data :  {'id' :row.bookId},
+                                   data :  {'id' :row.bookId},
                                    type: 'DELETE'
                                });
                                updateBookList();
@@ -67,7 +67,7 @@ function updateBookForm(){
 
 
             // Compose the data in the format that the API is expecting
-            var data = {  title: bookTitle, price: bookPrice, authId: auth_id, catId: cat_id };
+            var data = {  title: bookTitle, price: bookPrice, authorId  : auth_id, catId: cat_id };
 
 
             // Send the data using post
@@ -188,6 +188,39 @@ function updateAuthorForm(){
          });
 }
 
+function updateUserForm(){
+         $("#user-form-add").submit(function( event ) {
+            var user_name = $('#user_name').text();
+            var pswd = $('#pass').text();
+            var adrss = $('#adrs').text();
+            var rl = $('#rol').text();
+            var $form = $( this ),
+                user_name = $form.find( "input[name='username']" ).val(),
+                pswd = $form.find( "input[name='password']" ).val();
+                adrss = $form.find( "input[name='address']" ).val();
+                rl = $form.find( "input[name='role']" ).val();
+
+            // Compose the data in the format that the API is expecting
+            var data = {  username: user_name, password: pswd, address: adrss, role: rl};
+
+            // Send the data using post
+
+
+            $.ajax({
+                url: 'http://localhost:8085/backoffice/users/add',
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(){
+                  $('.book').empty().append("The result is correct! Congratulations!");
+                }
+            });
+
+            updateBookList();
+         });
+}
+
 function loadAuthors(){
 
         var authList = $('#auth');
@@ -202,6 +235,8 @@ function loadAuthors(){
                });
             });
 }
+
+
 
 function loadCategories(){
 
@@ -219,23 +254,92 @@ function loadCategories(){
             });
 }
 
+
+/*
+function login() {
+
+    $("#login-form").submit(function( event ) {
+
+            var user_name = $('#usr_name').text();
+            var pass_word = $('#pw').text();
+            var $form = $( this ),
+                //id = $form.find( "input[name='bookId']" ).val(),
+                user_name = $form.find( "input[name='username']" ).val(),
+                pass_word = $form.find( "input[name='password']" ).val();
+
+            // Compose the data in the format that the API is expecting
+            var data = {  username: user_name, password: pass_word};
+
+
+            // Send the data using post
+
+
+            $.ajax({
+                url: 'http://localhost:8085/backoffice/cms/login',
+                type: 'POST',
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data){
+                $each(data, function(option){
+                   if(option){
+                    return true;
+                   } else {
+                    return false;
+                   }
+                });
+
+                }
+            });
+    });
+
+}
+*/
+
+
+/*
+function start() {
+    if(login()){
+        updateUserForm();
+
+         loadCategories();
+
+          loadAuthors();
+
+          updateBookList();
+
+          updateBookForm();
+
+          updateBookUpdateForm();
+
+          updateCatForm();
+
+          updateAuthorForm();
+    } else {
+        login();
+    }
+
+}
+*/
+
 $(document).ready(function() {
 
+        updateUserForm();
 
+         loadCategories();
 
-    loadCategories();
+          loadAuthors();
 
-    loadAuthors();
+          updateBookList();
 
-    updateBookList();
+          updateBookForm();
 
-    updateBookForm();
+          updateBookUpdateForm();
 
-    updateBookUpdateForm();
+          updateCatForm();
 
-    updateCatForm();
+          updateAuthorForm();
 
-    updateAuthorForm();
 
 
 
