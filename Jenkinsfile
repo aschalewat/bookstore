@@ -2,7 +2,7 @@ pipeline {
   agent any
   parameters {
     #string(name: 'VERSION', defaultValue: '1.2.0', description: 'version to deploy on PROD')
-    choice(name: 'VERSION', choices: ['1.1.0', '1.2.0','1.3.0'], description: 'versions to choose')
+    choice(name: 'VERSION', choices: ['1.1.0', '1.2.0','1.3.0', '1.4.0'], description: 'versions to choose')
     booleanParam(name: 'executeTests', defaultValue: true, description: '')
   }
   tools {
