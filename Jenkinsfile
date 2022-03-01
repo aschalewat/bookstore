@@ -1,4 +1,5 @@
-pipeline {
+#1/usr/bin/env groovy
+node {
   agent any
   parameters {
     #string(name: 'VERSION', defaultValue: '1.2.0', description: 'version to deploy on PROD')
