@@ -60,6 +60,7 @@ public class BackofficeApiController {
         backofficeService.addBook(book1);
     }
 
+    //
     @RequestMapping(value = "/transactions/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
     public @ResponseBody Envelope addTransaction(@RequestBody Envelope envelope) {  //@RequestBody Book book
         LOGGER.debug("BackofficeApiController add {}", envelope);
