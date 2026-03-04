@@ -1,9 +1,6 @@
 package com.aschalew.bookstore.controllers;
 
-import com.aschalew.bookstore.model.Author;
-import com.aschalew.bookstore.model.Book;
-import com.aschalew.bookstore.model.Category;
-import com.aschalew.bookstore.model.User;
+import com.aschalew.bookstore.model.*;
 import com.aschalew.bookstore.services.AuthorService;
 import com.aschalew.bookstore.services.BackofficeService;
 import com.aschalew.bookstore.services.CategoryService;
@@ -11,10 +8,19 @@ import com.aschalew.bookstore.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.xml.sax.InputSource;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import java.io.BufferedWriter;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.List;
 
 @RestController
@@ -38,7 +44,7 @@ public class BackofficeApiController {
 
 
 
-    @PostMapping("/books/add")
+    @RequestMapping(value = "/books/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
     public void addBook(@RequestBody Book book){  //@RequestBody Book book
         LOGGER.debug("BackofficeApiController add {}", book.getBookId());
         //@RequestParam("bookId") String id, @RequestParam("title") String title, @RequestParam("price") double price
@@ -53,7 +59,34 @@ public class BackofficeApiController {
 
         backofficeService.addBook(book1);
     }
-    @GetMapping("/books/list")
+
+    @RequestMapping(value = "/transactions/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
+    public @ResponseBody Envelope addTransaction(@RequestBody Envelope envelope) {  //@RequestBody Book book
+        LOGGER.debug("BackofficeApiController add {}", envelope);
+        System.out.println(envelope);
+        try {
+            System.out.println(envelope);
+            //Envelope envelope1 = fromXML(envelope);
+            Envelope envelope2 = new Envelope();
+            Envelope.ResponseAcknowledge resAck = new Envelope.ResponseAcknowledge();
+            //resAck.setStatusCode(envelope1.getResponse().getStatusCode());
+            envelope2.setResponseAcknowledge(resAck);
+            String response = toXML(envelope2);
+            System.out.println(response);
+            return envelope2;
+            //return response;
+        } catch (Exception e) {
+            System.out.println("Error " + e);
+        }
+
+
+        return null;
+
+    }
+
+
+
+        @GetMapping("/books/list")
     public ResponseEntity<List<Book>> listBooks(){
         LOGGER.debug("BackofficeApiController getAll");
         return ResponseEntity.ok(backofficeService.getAllBooks());
@@ -160,6 +193,38 @@ public class BackofficeApiController {
     public void goToLogin(){
 
   }
+
+
+     String toXML(Envelope envelope) throws Exception{
+
+        JAXBContext context = JAXBContext.newInstance(Envelope.class);
+        try (StringWriter sw = new StringWriter();
+             BufferedWriter writer = new BufferedWriter(sw)) {
+
+            Marshaller m = context.createMarshaller();
+            m.marshal(envelope, writer);
+
+            String xml = sw.toString();
+            if (xml.startsWith("<?xml")) {
+                xml = xml.substring(xml.indexOf(">") + 1);
+            }
+
+            return xml;
+        }
+    }
+
+
+    Envelope fromXML(String envelope) throws Exception{
+
+        JAXBContext context = JAXBContext.newInstance(Envelope.class);
+        try (StringReader sr = new StringReader(envelope)) {
+
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Object envelopeObj = unmarshaller.unmarshal(new InputSource(sr));
+
+            return (Envelope)envelopeObj;
+        }
+    }
 
 
 }
