@@ -99,20 +99,17 @@ public class BackofficeApiController {
     }*/
 
     @PostMapping("/books/update")
-    public void updateBook(@RequestBody Book book){
-        LOGGER.debug("BackofficeApiController update {}", book.getBookId());
-       // Book book1 =  new Book();
-        if (book != null ){
-            /*book1.setBookId(Long.valueOf(book.getBookId()));
-            book1.setTitle(book.getTitle());
-            book1.setPrice(Double.valueOf(book.getPrice()));
-            book1.setCatId(Long.valueOf(book.getCatId()));*/
-            backofficeService.updateBook(book);
+    public void updateBook(@RequestBody Book book) {
+        if (book == null) {
+            LOGGER.debug("BackofficeApiController update skipped: book is null");
+            return;
         }
 
-
+        LOGGER.debug("BackofficeApiController update {}", book.getBookId());
+        backofficeService.updateBook(book);
     }
-
+    
+    // this is for delete
   @DeleteMapping(value = "/books/delete/{id}")
     public void deleteBook(@RequestParam("id") String id){
       LOGGER.debug("BackofficeApiController delete {}", id);
@@ -120,6 +117,7 @@ public class BackofficeApiController {
       System.out.println(ok);
   }
 
+  // this is for adding category
   @PostMapping("/categories/add")
     public void addCategory(@RequestBody Category category){
       LOGGER.debug("BackofficeApiController categories/add {}", category.getName());
